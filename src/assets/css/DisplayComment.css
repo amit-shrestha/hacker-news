@@ -1,0 +1,28 @@
+.comment {
+  box-shadow: 5px 5px 5px lightgray;
+  word-wrap: break-word;
+}
+
+.comment-by {
+  font-weight: bold;
+}
+
+.parent-comment {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.child-comment {
+  border-left: 3px solid #03a9f4;
+  padding-left: 20px;
+}
+
+.parent-comment:hover .child-comment {
+  border-left: 3px solid #b3e5fc;
+}
+
+@media screen and (min-width: 480px) {
+  .comment-text {
+    font-size: 18px;
+  }
+}

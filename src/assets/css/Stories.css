@@ -1,0 +1,93 @@
+.stories ul li {
+  width: 100%;
+  text-align: left;
+  margin: 10px auto;
+  list-style: none;
+  border-bottom: 1px solid #bdbdbd;
+  min-height: 70px;
+}
+
+.story {
+  margin-left: 10px;
+}
+
+.title {
+  min-height: 50px;
+}
+
+.title a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #212121;
+}
+
+.info {
+  color: #757575;
+}
+
+.info a {
+  text-decoration: none;
+  color: #757575;
+}
+
+.score {
+  margin-left: 10px;
+}
+
+.comments-count {
+  margin-left: 10px;
+}
+
+.pagination {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.pagination button {
+  background-color: #448aff;
+  border: none;
+  border-radius: 2px;
+  width: 70px;
+  line-height: 30px;
+  color: white;
+  outline: none;
+}
+
+.pagination button:hover {
+  background-color: #b3e5fc;
+  color: black;
+}
+
+.pagination span {
+  font-size: 20px;
+}
+
+.previous {
+  float: left;
+}
+
+.next {
+  float: right;
+}
+
+@media screen and (min-width: 480px) {
+  .story {
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .story {
+    text-align: center;
+  }
+
+  .title a {
+    font-size: 20px;
+  }
+  
+  .pagination button {
+    line-height: 40px;
+    width: 80px;
+  }
+}
