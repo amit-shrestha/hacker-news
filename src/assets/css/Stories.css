@@ -42,6 +42,8 @@
   margin-top: 10px;
   margin-bottom: 20px;
   text-align: center;
+  /* position: sticky;
+  top: 30px; */
 }
 
 .pagination button {
@@ -85,7 +87,7 @@
   .title a {
     font-size: 20px;
   }
-  
+
   .pagination button {
     line-height: 40px;
     width: 80px;

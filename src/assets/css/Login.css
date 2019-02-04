@@ -1,0 +1,44 @@
+.auth-form {
+  width: 60%;
+  /* margin-top: 10px;
+  margin-left: 20px; */
+  margin: 40px auto;
+}
+
+.auth-form input {
+  width: 100%;
+  margin-bottom: 30px;
+  border: none;
+  outline: none;
+  line-height: 20px;
+  font-size: 15px;
+  border-bottom: 1px solid black;
+}
+.auth-form button {
+  border: none;
+  outline: none;
+  background-color: #448aff;
+  border-radius: 2px;
+  line-height: 30px;
+  width: 60px;
+  margin-right: 20px;
+  font-size: 15px;
+}
+
+@media screen and (min-width: 480px) {
+  .auth-form {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .auth-form {
+    width: 40%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .auth-form {
+    width: 20%;
+  }
+}

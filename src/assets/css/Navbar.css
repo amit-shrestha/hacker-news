@@ -4,6 +4,8 @@
   line-height: 40px;
   background-color: #03a9f4;
   color: #ffffff;
+  position: sticky;
+  top: 0;
 }
 
 .nav-bar ul li {
@@ -12,7 +14,7 @@
 }
 
 h1 {
-  padding-top: 10px;
+  float: left;
 }
 
 .nav-bar ul li a {
@@ -34,6 +36,13 @@ h1 {
 .nav-bar ul li a.active {
   background-color: #b3e5fc;
   color: black;
+}
+
+.header {
+  padding-top: 20px;
+}
+.logout-btn {
+  float: right;
 }
 
 @media screen and (min-width: 768px) {

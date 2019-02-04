@@ -5,6 +5,8 @@ import '../assets/css';
 import Navbar from './Navbar';
 import Stories from './Stories';
 import DisplayStory from './DisplayStory';
+import PrivateRoute from './PrivateRoute';
+import Login from './Login';
 
 /**
  *
@@ -29,25 +31,25 @@ class App extends Component {
    */
   render() {
     return (
-      <Router>
+      <Router basename="/hacker-news">
         <div className="wrapper">
           <div className="container">
             <Navbar />
             <Switch>
-              <Route
-                exact
-                path="/"
+              <Route exact path="/" component={Login} />
+              <PrivateRoute
+                path="/newstories"
                 component={props => <Stories {...props} option="newstories" />}
               />
-              <Route
+              <PrivateRoute
                 path="/topstories"
                 component={props => <Stories {...props} option="topstories" />}
               />
-              <Route
+              <PrivateRoute
                 path="/beststories"
                 component={props => <Stories {...props} option="beststories" />}
               />
-              <Route path="/:story_id" component={DisplayStory} />
+              <PrivateRoute path="/:story_id" component={DisplayStory} />
             </Switch>
           </div>
         </div>

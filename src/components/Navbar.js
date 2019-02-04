@@ -1,5 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+
+import { auth } from '../utils/auth';
 
 /**
  *
@@ -7,10 +9,18 @@ import { NavLink } from 'react-router-dom';
 const Navbar = () => {
   return (
     <div className="nav-bar">
-      <h1>Hacker News</h1>
+      <div className="header clearfix">
+        <h1>Hacker News</h1>
+        {auth.isAuthenticated ? (
+          <div>
+            <Link to="/">Log out</Link>
+          </div>
+        ) : null}
+      </div>
+
       <ul>
         <li>
-          <NavLink exact to="/" activeClassName="active">
+          <NavLink to="/newstories" activeClassName="active">
             New Stories
           </NavLink>
         </li>
