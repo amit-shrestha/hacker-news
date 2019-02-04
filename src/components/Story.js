@@ -1,19 +1,19 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 
-import DisplayComment from './DisplayComment';
+import Comment from './Comment';
 
 /**
  *
  *
- * @class DisplayStory
+ * @class Story
  * @extends {React.Component}
  */
-class DisplayStory extends React.Component {
+class Story extends React.Component {
   /**
-   * Creates an instance of DisplayStory.
+   * Creates an instance of Story.
    *
-   * @memberof DisplayStory
+   * @memberof Story
    */
   constructor() {
     super();
@@ -25,7 +25,7 @@ class DisplayStory extends React.Component {
   /**
    *
    *
-   * @memberof DisplayStory
+   * @memberof Story
    */
   componentDidMount() {
     this.setState({
@@ -36,7 +36,7 @@ class DisplayStory extends React.Component {
    *
    *
    * @returns
-   * @memberof DisplayStory
+   * @memberof Story
    */
   render() {
     return (
@@ -49,15 +49,15 @@ class DisplayStory extends React.Component {
           />
         ) : null}
         {this.state.story.kids && this.state.story.kids.length > 0 ? (
-          <DisplayComment kids={this.state.story.kids} />
+          <Comment kids={this.state.story.kids} />
         ) : null}
       </div>
     );
   }
 }
 
-DisplayStory.propTypes = {
+Story.propTypes = {
   location: Proptypes.object
 };
 
-export default DisplayStory;
+export default Story;

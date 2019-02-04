@@ -1,4 +1,6 @@
 export const CONSTANTS = {
-  numberOfStoriesPerPage: 10,
-  pageIndex: 0
+  NO_OF_STORIES_PER_PAGE: 10,
+  PAGE_INDEX: 0,
+  STORY: 'STORY',
+  COMMENT: 'COMMENT'
 };

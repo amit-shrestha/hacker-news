@@ -2,68 +2,63 @@ import React from 'react';
 import Proptypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { instance } from '../utils/config';
 import { CONSTANTS } from '../constants/constants';
+import { getStories, getItems } from '../utils/service';
 /**
  *
  */
-class Stories extends React.Component {
+class StoryWrapper extends React.Component {
   /**
-   * Creates an instance of Stories.
+   * Creates an instance of StoryWrapper.
    *
-   * @memberof Stories
+   * @memberof StoryWrapper
    */
   constructor() {
     super();
-    this.pageIndex = CONSTANTS.pageIndex;
-    this.numberOfStoriesPerPage = CONSTANTS.numberOfStoriesPerPage;
     this.state = {
       storyIds: [],
       stories: [],
       storyIdsPerPage: [],
-      buttonEnable: true
+      buttonEnable: true,
+      pageIndex: CONSTANTS.PAGE_INDEX,
+      numberOfStoriesPerPage: CONSTANTS.NO_OF_STORIES_PER_PAGE
     };
   }
 
   /**
    *
    *
-   * @memberof Stories
+   * @memberof StoryWrapper
    */
-  componentDidMount() {
-    instance
-      .get(`/${this.props.option}.json`)
-      .then(response => {
-        this.setState(
-          {
-            storyIds: response.data
-          },
-          () =>
-            this.setState(
-              {
-                storyIdsPerPage: this.state.storyIds.slice(
-                  this.pageIndex,
-                  this.numberOfStoriesPerPage
-                )
-              },
-              () => this.fetchStories()
-            )
-        );
-      })
-      .catch(err => err);
-  }
+  componentDidMount = async () => {
+    const storyIds = await getStories(this.props.option);
+
+    this.setState({ storyIds }, () =>
+      this.setState(
+        {
+          storyIdsPerPage: this.state.storyIds.slice(
+            this.state.pageIndex,
+            this.state.numberOfStoriesPerPage
+          )
+        },
+        () => this.fetchStories()
+      )
+    );
+  };
 
   handlePreviousClick = () => {
-    if (this.pageIndex !== 0) {
-      this.pageIndex = this.pageIndex - 1;
-      this.setStories();
+    if (this.state.pageIndex !== 0) {
+      this.setState({ pageIndex: this.state.pageIndex - 1 }, () =>
+        this.setStories()
+      );
     }
   };
 
   handleNextClick = () => {
-    if (!(this.pageIndex > this.state.storyIds.length)) {
-      this.pageIndex = this.pageIndex + 1;
-      this.setStories();
+    if (!(this.state.pageIndex > this.state.storyIds.length)) {
+      this.setState({ pageIndex: this.state.pageIndex + 1 }, () =>
+        this.setStories()
+      );
     }
   };
 
@@ -72,8 +67,8 @@ class Stories extends React.Component {
       {
         stories: [],
         storyIdsPerPage: this.state.storyIds.slice(
-          this.pageIndex * this.numberOfStoriesPerPage,
-          (this.pageIndex + 1) * this.numberOfStoriesPerPage
+          this.state.pageIndex * this.state.numberOfStoriesPerPage,
+          (this.state.pageIndex + 1) * this.state.numberOfStoriesPerPage
         )
       },
       () => {
@@ -83,21 +78,18 @@ class Stories extends React.Component {
   };
 
   fetchStories = () => {
-    this.state.storyIdsPerPage.map(id =>
-      instance
-        .get(`/item/${id}.json`)
-        .then(response =>
-          this.setState({ stories: [...this.state.stories, response.data] })
-        )
-        .catch(err => err)
-    );
+    this.state.storyIdsPerPage.forEach(async id => {
+      const item = await getItems(id);
+
+      this.setState({ stories: [...this.state.stories, item] });
+    });
   };
 
   /**
    *
    *
    * @returns
-   * @memberof Stories
+   * @memberof StoryWrapper
    */
   render() {
     return (
@@ -109,14 +101,14 @@ class Stories extends React.Component {
           >
             Previous
           </button>
-          <span>{this.pageIndex + 1}</span>
+          <span>{this.state.pageIndex + 1}</span>
           <button className="next" onClick={() => this.handleNextClick()}>
             Next
           </button>
         </div>
         <ul>
           {this.state.stories.map(story => (
-            <li key={story.id}>
+            <li key={`${CONSTANTS.STORY}-${story.id}`}>
               <div className="story">
                 <div className="title">
                   {story.url ? (
@@ -125,7 +117,7 @@ class Stories extends React.Component {
                     <Link
                       to={{
                         pathname: `/${story.id}`,
-                        state: { story: story }
+                        state: { story }
                       }}
                     >
                       {story.title}
@@ -140,7 +132,7 @@ class Stories extends React.Component {
                     <Link
                       to={{
                         pathname: `/${story.id}`,
-                        state: { story: story }
+                        state: { story }
                       }}
                     >
                       <span className="comments-count">
@@ -158,8 +150,8 @@ class Stories extends React.Component {
   }
 }
 
-Stories.propTypes = {
+StoryWrapper.propTypes = {
   option: Proptypes.string.isRequired
 };
 
-export default Stories;
+export default StoryWrapper;
