@@ -2,9 +2,9 @@ import { http } from '../utils/config';
 
 /**
  *
- * @param {*} option
+ * @param {String} option
  */
-export const getStories = option => {
+export const getStoryIds = option => {
   return http
     .get(`/${option}.json`)
     .then(response => {
@@ -15,9 +15,9 @@ export const getStories = option => {
 
 /**
  *
- * @param {*} id
+ * @param {Integer} id
  */
-export const getItems = id => {
+export const getItem = id => {
   return http
     .get(`/item/${id}.json`)
     .then(response => {

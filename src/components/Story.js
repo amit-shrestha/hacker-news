@@ -4,57 +4,29 @@ import Proptypes from 'prop-types';
 import Comment from './Comment';
 
 /**
+ * Returns Story Content.
  *
- *
- * @class Story
- * @extends {React.Component}
+ * @param {Object} props
  */
-class Story extends React.Component {
-  /**
-   * Creates an instance of Story.
-   *
-   * @memberof Story
-   */
-  constructor() {
-    super();
-    this.state = {
-      story: []
-    };
-  }
-
-  /**
-   *
-   *
-   * @memberof Story
-   */
-  componentDidMount() {
-    this.setState({
-      story: this.props.location.state.story
-    });
-  }
-  /**
-   *
-   *
-   * @returns
-   * @memberof Story
-   */
-  render() {
-    return (
-      <div className="story-div">
-        <h2>{this.state.story.title}</h2>
-        {this.state.story.text ? (
-          <div
-            className="story-text"
-            dangerouslySetInnerHTML={{ __html: this.state.story.text }}
-          />
-        ) : null}
-        {this.state.story.kids && this.state.story.kids.length > 0 ? (
-          <Comment kids={this.state.story.kids} />
-        ) : null}
-      </div>
-    );
-  }
-}
+const Story = props => {
+  return (
+    <div className="story-div">
+      <h2>{props.location.state.story.title}</h2>
+      {props.location.state.story.text ? (
+        <div
+          className="story-text"
+          dangerouslySetInnerHTML={{
+            __html: props.location.state.story.text
+          }}
+        />
+      ) : null}
+      {props.location.state.story.kids &&
+      props.location.state.story.kids.length > 0 ? (
+        <Comment kids={props.location.state.story.kids} />
+      ) : null}
+    </div>
+  );
+};
 
 Story.propTypes = {
   location: Proptypes.object

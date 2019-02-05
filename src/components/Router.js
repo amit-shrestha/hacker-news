@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import Story from './Story';
 import Navbar from './Navbar';
 import StoryWrapper from './StoryWrapper';
-import Story from './Story';
+import { CONSTANTS } from '../constants/constants';
 
 /**
- *
+ * Returns Route paths.
  */
 const Router = () => {
   return (
@@ -19,19 +20,19 @@ const Router = () => {
               exact
               path="/"
               component={props => (
-                <StoryWrapper {...props} option="newstories" />
+                <StoryWrapper {...props} option={CONSTANTS.NEW_STORIES} />
               )}
             />
             <Route
               path="/topstories"
               component={props => (
-                <StoryWrapper {...props} option="topstories" />
+                <StoryWrapper {...props} option={CONSTANTS.TOP_STORIES} />
               )}
             />
             <Route
               path="/beststories"
               component={props => (
-                <StoryWrapper {...props} option="beststories" />
+                <StoryWrapper {...props} option={CONSTANTS.BEST_STORIES} />
               )}
             />
             <Route path="/:story_id" component={Story} />

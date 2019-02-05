@@ -1,7 +1,7 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 
-import { getItems } from '../utils/service';
+import { getItem } from '../services/service';
 import { CONSTANTS } from '../constants/constants';
 /**
  *
@@ -13,32 +13,34 @@ class Comment extends React.Component {
   /**
    * Creates an instance of Comment.
    *
-   * @param {*} props
    * @memberof Comment
    */
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      comments: [],
-      kids: props.kids
+      comments: []
     };
   }
 
   /**
-   *
+   * Set comments in the state.
    *
    * @memberof Comment
    */
   componentDidMount = () => {
-    this.state.kids.forEach(async id => {
-      const item = await getItems(id);
+    let comments = [];
 
-      this.setState({ comments: [...this.state.comments, item] });
-    });
+    Promise.all(
+      (comments = this.props.kids.map(async id => {
+        const item = await getItem(id);
+
+        return item;
+      }))
+    ).then(comments => this.setState({ comments }));
   };
 
   /**
-   *
+   *  Renders comments.
    *
    * @returns
    * @memberof Comment

@@ -54,11 +54,6 @@
   outline: none;
 }
 
-.pagination button:hover {
-  background-color: #b3e5fc;
-  color: black;
-}
-
 .pagination span {
   font-size: 20px;
 }
@@ -85,9 +80,16 @@
   .title a {
     font-size: 20px;
   }
-  
+
   .pagination button {
     line-height: 40px;
     width: 80px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .pagination button:hover {
+    background-color: #b3e5fc;
+    color: black;
   }
 }

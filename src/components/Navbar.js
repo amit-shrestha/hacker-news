@@ -1,8 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { CONSTANTS } from '../constants/constants';
+
 /**
- *
+ *  Returns Navbar component.
  */
 const Navbar = () => {
   return (
@@ -15,12 +17,12 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/topstories" activeClassName="active">
+          <NavLink to={`/${CONSTANTS.TOP_STORIES}`} activeClassName="active">
             Top Stories
           </NavLink>
         </li>
         <li>
-          <NavLink to="/beststories" activeClassName="active">
+          <NavLink to={`/${CONSTANTS.BEST_STORIES}`} activeClassName="active">
             Best Stories
           </NavLink>
         </li>

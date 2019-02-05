@@ -3,9 +3,12 @@ import Proptypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { CONSTANTS } from '../constants/constants';
-import { getStories, getItems } from '../utils/service';
+import { getStoryIds, getItem } from '../services/service';
 /**
  *
+ *
+ * @class StoryWrapper
+ * @augments {React.Component}
  */
 class StoryWrapper extends React.Component {
   /**
@@ -26,12 +29,12 @@ class StoryWrapper extends React.Component {
   }
 
   /**
-   *
+   * Get Story Ids, slice Ids to be displayed and call fetchStories().
    *
    * @memberof StoryWrapper
    */
   componentDidMount = async () => {
-    const storyIds = await getStories(this.props.option);
+    const storyIds = await getStoryIds(this.props.option);
 
     this.setState({ storyIds }, () =>
       this.setState(
@@ -78,15 +81,19 @@ class StoryWrapper extends React.Component {
   };
 
   fetchStories = () => {
-    this.state.storyIdsPerPage.forEach(async id => {
-      const item = await getItems(id);
+    let stories = [];
 
-      this.setState({ stories: [...this.state.stories, item] });
-    });
+    Promise.all(
+      (stories = this.state.storyIdsPerPage.map(async id => {
+        const item = await getItem(id);
+
+        return item;
+      }))
+    ).then(stories => this.setState({ stories }));
   };
 
   /**
-   *
+   * Renders list of Stories.
    *
    * @returns
    * @memberof StoryWrapper

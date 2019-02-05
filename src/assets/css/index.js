@@ -1,6 +1,6 @@
 import './reset.css';
-import './App.css';
-import './Navbar.css';
-import './StoryWrapper.css';
-import './Story.css';
-import './Comment.css';
+import './app.css';
+import './navbar.css';
+import './storyWrapper.css';
+import './story.css';
+import './comment.css';
