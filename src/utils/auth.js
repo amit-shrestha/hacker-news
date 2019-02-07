@@ -5,5 +5,10 @@ export const auth = {
    */
   authenticate: () => {
     auth.isAuthenticated = true;
+  },
+
+  logout: cb => {
+    auth.isAuthenticated = false;
+    cb();
   }
 };

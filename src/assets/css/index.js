@@ -1,7 +1,7 @@
 import './reset.css';
-import './App.css';
-import './Navbar.css';
-import './Stories.css';
-import './DisplayStory.css';
-import './DisplayComment.css';
-import './Login.css';
+import './app.css';
+import './navbar.css';
+import './storyWrapper.css';
+import './story.css';
+import './comment.css';
+import './login.css';

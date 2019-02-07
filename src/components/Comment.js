@@ -1,55 +1,58 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 
-import { instance } from '../utils/config';
-
+import { getItem } from '../services/service';
+import { CONSTANTS } from '../constants/constants';
 /**
  *
  *
- * @class DisplayComment
+ * @class Comment
  * @extends {React.Component}
  */
-class DisplayComment extends React.Component {
+class Comment extends React.Component {
   /**
-   * Creates an instance of DisplayComment.
+   * Creates an instance of Comment.
    *
-   * @param {*} props
-   * @memberof DisplayComment
+   * @memberof Comment
    */
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      comments: [],
-      kids: props.kids
+      comments: []
     };
   }
 
   /**
+   * Set comments in the state.
    *
-   *
-   * @memberof DisplayComment
+   * @memberof Comment
    */
   componentDidMount = () => {
-    this.state.kids.forEach(id => {
-      instance
-        .get(`/item/${id}.json`)
-        .then(response =>
-          this.setState({ comments: [...this.state.comments, response.data] })
-        )
-        .catch(err => err);
-    });
+    // eslint-disable-next-line
+    let comments = [];
+
+    Promise.all(
+      (comments = this.props.kids.map(async id => {
+        const item = await getItem(id);
+
+        return item;
+      }))
+    ).then(comments => this.setState({ comments }));
   };
 
   /**
-   *
+   *  Renders comments.
    *
    * @returns
-   * @memberof DisplayComment
+   * @memberof Comment
    */
   render() {
     return this.state.comments && this.state.comments.length > 0
       ? this.state.comments.map(comment => (
-          <div className="parent-comment" key={comment.id}>
+          <div
+            className="parent-comment"
+            key={`${CONSTANTS.COMMENT}-${comment.id}`}
+          >
             {comment.deleted ? (
               '*comment deleted*'
             ) : (
@@ -64,7 +67,7 @@ class DisplayComment extends React.Component {
 
             {comment.kids ? (
               <div className="child-comment">
-                <DisplayComment kids={comment.kids} />
+                <Comment kids={comment.kids} />
               </div>
             ) : null}
           </div>
@@ -72,8 +75,8 @@ class DisplayComment extends React.Component {
       : null;
   }
 }
-DisplayComment.propTypes = {
+Comment.propTypes = {
   kids: Proptypes.array.isRequired
 };
 
-export default DisplayComment;
+export default Comment;
