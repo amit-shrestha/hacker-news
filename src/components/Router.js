@@ -13,7 +13,7 @@ import Login from './Login';
  */
 const Router = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="hacker-news">
       <div className="wrapper">
         <div className="container">
           <Route path="/" component={Navbar} />
