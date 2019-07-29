@@ -1,0 +1,14 @@
+.story-div {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.story-text {
+  border: 1px solid black;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  text-align: center;
+}
