@@ -42,6 +42,8 @@
   margin-top: 10px;
   margin-bottom: 20px;
   text-align: center;
+  /* position: sticky;
+  top: 30px; */
 }
 
 .pagination button {

@@ -28,6 +28,7 @@ class Comment extends React.Component {
    * @memberof Comment
    */
   componentDidMount = () => {
+    // eslint-disable-next-line
     let comments = [];
 
     Promise.all(

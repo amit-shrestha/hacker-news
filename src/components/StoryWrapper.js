@@ -81,6 +81,7 @@ class StoryWrapper extends React.Component {
   };
 
   fetchStories = () => {
+    // eslint-disable-next-line
     let stories = [];
 
     Promise.all(

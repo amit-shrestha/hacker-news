@@ -5,37 +5,40 @@ import Story from './Story';
 import Navbar from './Navbar';
 import StoryWrapper from './StoryWrapper';
 import { CONSTANTS } from '../constants/constants';
+import PrivateRoute from './PrivateRoute';
+import Login from './Login';
 
 /**
  * Returns Route paths.
  */
 const Router = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="hacker-news">
       <div className="wrapper">
         <div className="container">
-          <Navbar />
+          <Route path="/" component={Navbar} />
+
           <Switch>
-            <Route
-              exact
-              path="/"
+            <Route exact path="/" component={Login} />
+            <PrivateRoute
+              path={`/${CONSTANTS.NEW_STORIES}`}
               component={props => (
                 <StoryWrapper {...props} option={CONSTANTS.NEW_STORIES} />
               )}
             />
-            <Route
-              path="/topstories"
+            <PrivateRoute
+              path={`/${CONSTANTS.TOP_STORIES}`}
               component={props => (
                 <StoryWrapper {...props} option={CONSTANTS.TOP_STORIES} />
               )}
             />
-            <Route
-              path="/beststories"
+            <PrivateRoute
+              path={`/${CONSTANTS.BEST_STORIES}`}
               component={props => (
                 <StoryWrapper {...props} option={CONSTANTS.BEST_STORIES} />
               )}
             />
-            <Route path="/:story_id" component={Story} />
+            <PrivateRoute path="/:story_id" component={Story} />
           </Switch>
         </div>
       </div>

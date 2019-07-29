@@ -4,6 +4,8 @@
   line-height: 40px;
   background-color: #03a9f4;
   color: #ffffff;
+  position: sticky;
+  top: 0;
 }
 
 .nav-bar ul li {
@@ -12,7 +14,7 @@
 }
 
 h1 {
-  padding-top: 10px;
+  display: inline;
 }
 
 .nav-bar ul li a {
@@ -25,6 +27,26 @@ h1 {
 .nav-bar ul li a.active {
   background-color: #b3e5fc;
   color: black;
+}
+
+.header {
+  padding-top: 20px;
+}
+
+.logout-btn {
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+}
+
+.logout-btn button {
+  background-color: #448aff;
+  border: none;
+  border-radius: 2px;
+  width: 50px;
+  line-height: 30px;
+  color: white;
+  outline: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -46,6 +68,15 @@ h1 {
 
   .nav-bar ul li:hover a {
     text-decoration: underline;
+    color: black;
+  }
+
+  .logout-btn button {
+    width: 70px;
+  }
+
+  .logout-btn button:hover {
+    background-color: #b3e5fc;
     color: black;
   }
 }
